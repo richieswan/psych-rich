@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Psych 3/4 Study Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf7f2;
+    --sage: #8fac8e;
+    --sage-light: #c5d9c4;
+    --sage-dark: #5a7a59;
+    --lavender: #c4b8d9;
+    --lavender-light: #e8e2f4;
+    --dusty-rose: #d4a5a5;
+    --rose-light: #f0e0e0;
+    --warm-gray: #9a9189;
+    --text: #3d3530;
+    --text-light: #7a6e67;
+    --white: #ffffff;
+    --card-shadow: 0 4px 24px rgba(90,122,89,0.08);
+    --card-shadow-hover: 0 8px 40px rgba(90,122,89,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(250,247,242,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--sage-light);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    letter-spacing: 0.02em;
+  }
+
+  .nav-logo span { color: var(--dusty-rose); font-style: italic; }
+
+  .nav-links {
+    display: flex;
+    gap: 0.5rem;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-light);
+    padding: 0.35rem 0.75rem;
+    border-radius: 20px;
+    transition: all 0.2s;
+    letter-spacing: 0.03em;
+  }
+
+  .nav-links a:hover {
+    background: var(--sage-light);
+    color: var(--sage-dark);
+  }
+
+  /* HERO */
+  .hero {
+    text-align: center;
+    padding: 5rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px; left: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, var(--sage-light) 0%, transparent 70%);
+    opacity: 0.5;
+    animation: floatBlob 8s ease-in-out infinite;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -80px; right: -80px;
+    width: 350px; height: 350px;
+    background: radial-gradient(circle, var(--lavender-light) 0%, transparent 70%);
+    opacity: 0.6;
+    animation: floatBlob 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes floatBlob {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    50% { transform: translate(30px, 20px) scale(1.05); }
+  }
+
+  .hero-tag {
+    display: inline-block;
+    background: var(--lavender-light);
+    color: #7a6a9a;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--text);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--sage-dark);
+  }
+
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--text-light);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    position: relative;
+    z-index: 1;
+  }
+
+  .topic-pills {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .pill {
+    padding: 0.5rem 1.25rem;
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border: 1.5px solid;
+  }
+
+  .pill-sage { background: var(--sage-light); border-color: var(--sage); color: var(--sage-dark); }
+  .pill-rose { background: var(--rose-light); border-color: var(--dusty-rose); color: #9a5a5a; }
+  .pill-lav { background: var(--lavender-light); border-color: var(--lavender); color: #7a6a9a; }
+
+  /* SECTION NAV CARDS */
+  .sections-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    max-width: 960px;
+    margin: 0 auto 5rem;
+    padding: 0 2rem;
+  }
+
+  .section-nav-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    cursor: pointer;
+    border: 1.5px solid transparent;
+    box-shadow: var(--card-shadow);
+    transition: all 0.25s ease;
+    text-decoration: none;
+    color: var(--text);
+    display: block;
+  }
+
+  .section-nav-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--sage-light);
+  }
+
+  .section-nav-card .icon { font-size: 2rem; margin-bottom: 0.75rem; display: block; }
+  .section-nav-card h3 { font-size: 0.85rem; font-weight: 500; color: var(--text-light); }
+
+  /* MAIN SECTIONS */
+  .study-section {
+    max-width: 960px;
+    margin: 0 auto 6rem;
+    padding: 0 2rem;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .section-header .icon-lg {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .icon-sage { background: var(--sage-light); }
+  .icon-lav { background: var(--lavender-light); }
+  .icon-rose { background: var(--rose-light); }
+  .icon-mint { background: #d4ede8; }
+  .icon-peach { background: #f0ddd4; }
+  .icon-sky { background: #d4e8f0; }
+
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.2rem;
+    font-weight: 400;
+    color: var(--text);
+  }
+
+  .section-header p { font-size: 0.9rem; color: var(--text-light); }
+
+  .divider {
+    width: 60px; height: 2px;
+    background: linear-gradient(90deg, var(--sage), var(--lavender));
+    border-radius: 2px;
+    margin: 0.5rem 0 1rem;
+  }
+
+  /* ── FLASHCARDS ── */
+  .flashcard-controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .topic-filter {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .filter-btn {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1.5px solid var(--sage-light);
+    background: transparent;
+    color: var(--text-light);
+    transition: all 0.2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .filter-btn.active, .filter-btn:hover {
+    background: var(--sage-light);
+    color: var(--sage-dark);
+    border-color: var(--sage);
+  }
+
+  .flashcard-stage {
+    perspective: 1000px;
+    height: 260px;
+    margin-bottom: 1.5rem;
+  }
+
+  .flashcard {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+  }
+
+  .flashcard.flipped { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backface-visibility: hidden;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+
+  .card-front {
+    background: linear-gradient(145deg, var(--white), var(--sage-light));
+    border: 1.5px solid var(--sage-light);
+  }
+
+  .card-back {
+    background: linear-gradient(145deg, var(--lavender-light), var(--white));
+    border: 1.5px solid var(--lavender);
+    transform: rotateY(180deg);
+  }
+
+  .card-face .label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--warm-gray);
+    margin-bottom: 1rem;
+  }
+
+  .card-face .term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.9rem;
+    font-weight: 400;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .card-face .hint {
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+    font-style: italic;
+  }
+
+  .card-back .definition {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .flashcard-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .nav-btn {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--sage-light);
+    background: var(--white);
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    color: var(--sage-dark);
+  }
+
+  .nav-btn:hover { background: var(--sage-light); }
+
+  .card-counter {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    min-width: 60px;
+    text-align: center;
+  }
+
+  .flip-hint {
+    text-align: center;
+    font-size: 0.78rem;
+    color: var(--warm-gray);
+    font-style: italic;
+    margin-top: 0.75rem;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-card {
+    background: var(--white);
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    border: 1.5px solid #f0ece5;
+  }
+
+  .quiz-progress-bar {
+    height: 4px;
+    background: var(--sage-light);
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+
+  .quiz-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage), var(--lavender));
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-question-num {
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.75rem;
+  }
+
+  .quiz-question {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-options {
+    display: grid;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quiz-option {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    border: 1.5px solid #e8e2db;
+    background: var(--cream);
+    cursor: pointer;
+    font-size: 0.92rem;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    transition: all 0.2s;
+    line-height: 1.5;
+  }
+
+  .quiz-option:hover:not(.disabled) {
+    border-color: var(--sage);
+    background: var(--sage-light);
+  }
+
+  .quiz-option.correct { background: #d4edda; border-color: #82c991; color: #2d6a3f; }
+  .quiz-option.incorrect { background: var(--rose-light); border-color: var(--dusty-rose); color: #9a3a3a; }
+  .quiz-option.disabled { cursor: default; }
+
+  .quiz-feedback {
+    padding: 1rem 1.25rem;
+    border-radius: 12px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    display: none;
+  }
+
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: #d4edda; color: #2d6a3f; border: 1px solid #82c991; }
+  .quiz-feedback.incorrect { background: var(--rose-light); color: #9a3a3a; border: 1px solid var(--dusty-rose); }
+
+  .btn-primary {
+    padding: 0.7rem 1.75rem;
+    border-radius: 25px;
+    background: var(--sage-dark);
+    color: var(--white);
+    border: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 0.03em;
+    transition: all 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--sage); transform: translateY(-1px); }
+
+  .quiz-score-display {
+    text-align: center;
+    padding: 2rem;
+    display: none;
+  }
+
+  .quiz-score-display.show { display: block; }
+
+  .score-circle {
+    width: 100px; height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--sage-light), var(--lavender-light));
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    border: 2px solid var(--sage);
+  }
+
+  /* ── GLOSSARY ── */
+  .glossary-search {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    border-radius: 12px;
+    border: 1.5px solid var(--sage-light);
+    background: var(--white);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.92rem;
+    color: var(--text);
+    outline: none;
+    margin-bottom: 1.5rem;
+    transition: border-color 0.2s;
+  }
+
+  .glossary-search:focus { border-color: var(--sage); }
+
+  .glossary-grid {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .glossary-item {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--card-shadow);
+    border-left: 3px solid var(--sage);
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    transition: all 0.2s;
+  }
+
+  .glossary-item:hover { transform: translateX(4px); }
+  .glossary-item.topic-nervous { border-left-color: var(--lavender); }
+  .glossary-item.topic-stress { border-left-color: var(--dusty-rose); }
+
+  .glossary-term {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    min-width: 180px;
+  }
+
+  .glossary-def {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--text-light);
+    flex: 1;
+  }
+
+  .topic-tag {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 10px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    align-self: flex-start;
+    margin-top: 0.15rem;
+  }
+
+  .tag-nervous { background: var(--lavender-light); color: #7a6a9a; }
+  .tag-stress { background: var(--rose-light); color: #9a5a5a; }
+
+  .no-results {
+    text-align: center;
+    color: var(--warm-gray);
+    font-style: italic;
+    padding: 2rem;
+    display: none;
+  }
+
+  /* ── NOTES ── */
+  .notes-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 2px solid var(--sage-light);
+    padding-bottom: 0;
+  }
+
+  .notes-tab {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    color: var(--text-light);
+    font-family: 'DM Sans', sans-serif;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all 0.2s;
+  }
+
+  .notes-tab.active {
+    color: var(--sage-dark);
+    border-bottom-color: var(--sage-dark);
+  }
+
+  .notes-content {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .notes-content.active { display: block; }
+
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .notes-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 1rem;
+  }
+
+  .notes-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--sage-light);
+  }
+
+  .notes-card p {
+    font-size: 0.9rem;
+    line-height: 1.8;
+    color: var(--text-light);
+    margin-bottom: 1rem;
+  }
+
+  .notes-card ul {
+    padding-left: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  .notes-card ul li {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin-bottom: 0.4rem;
+  }
+
+  .notes-card ul li strong { color: var(--text); font-weight: 500; }
+
+  .info-box {
+    background: var(--sage-light);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 1rem 0;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    color: var(--sage-dark);
+    border-left: 3px solid var(--sage);
+  }
+
+  .diagram {
+    background: var(--cream);
+    border-radius: 14px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border: 1.5px dashed var(--sage-light);
+    text-align: center;
+  }
+
+  .diagram-title {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warm-gray);
+    margin-bottom: 1.25rem;
+  }
+
+  .ns-diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .ns-box {
+    padding: 0.5rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.82rem;
+    font-weight: 500;
+  }
+
+  .ns-central { background: var(--sage-light); color: var(--sage-dark); }
+  .ns-peripheral { background: var(--lavender-light); color: #7a6a9a; }
+  .ns-somatic { background: #d4ede8; color: #3a7a6a; }
+  .ns-auto { background: var(--rose-light); color: #9a5a5a; }
+  .ns-symp { background: #f0ddd4; color: #9a6a4a; }
+  .ns-para { background: #d4e8f0; color: #4a6a9a; }
+
+  .ns-row { display: flex; gap: 1rem; justify-content: center; }
+  .ns-line {
+    width: 2px; height: 20px;
+    background: var(--sage-light);
+    margin: 0 auto;
+  }
+  .ns-line-pair {
+    display: flex; gap: 3rem; justify-content: center;
+    position: relative;
+  }
+
+  /* ── EXAM TIPS ── */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .tip-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.25s;
+  }
+
+  .tip-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  .tip-card .tip-icon {
+    font-size: 1.75rem;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .tip-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+  }
+
+  .tip-card p, .tip-card li {
+    font-size: 0.87rem;
+    line-height: 1.7;
+    color: var(--text-light);
+  }
+
+  .tip-card ul { padding-left: 1rem; }
+  .tip-card li { margin-bottom: 0.3rem; }
+
+  .tip-card.highlight-sage { border-top: 3px solid var(--sage); }
+  .tip-card.highlight-lav { border-top: 3px solid var(--lavender); }
+  .tip-card.highlight-rose { border-top: 3px solid var(--dusty-rose); }
+  .tip-card.highlight-mint { border-top: 3px solid #7abfb0; }
+
+  /* ── TIMELINE ── */
+  .timeline {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px; top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--sage-light), var(--lavender-light), var(--rose-light));
+    border-radius: 2px;
+  }
+
+  .timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+    padding-left: 1.5rem;
+    animation: fadeIn 0.4s ease both;
+  }
+
+  .timeline-dot {
+    position: absolute;
+    left: -1.92rem;
+    top: 0.25rem;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--sage);
+  }
+
+  .timeline-dot.dot-sage { background: var(--sage); box-shadow: 0 0 0 2px var(--sage); }
+  .timeline-dot.dot-lav { background: var(--lavender); box-shadow: 0 0 0 2px var(--lavender); }
+  .timeline-dot.dot-rose { background: var(--dusty-rose); box-shadow: 0 0 0 2px var(--dusty-rose); }
+  .timeline-dot.dot-mint { background: #7abfb0; box-shadow: 0 0 0 2px #7abfb0; }
+
+  .timeline-card {
+    background: var(--white);
+    border-radius: 14px;
+    padding: 1.25rem 1.5rem;
+    box-shadow: var(--card-shadow);
+    transition: all 0.25s;
+  }
+
+  .timeline-card:hover { transform: translateX(4px); }
+
+  .timeline-stage {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--warm-gray);
+    margin-bottom: 0.3rem;
+  }
+
+  .timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.87rem;
+    line-height: 1.6;
+    color: var(--text-light);
+  }
+
+  .timeline-tabs {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: var(--warm-gray);
+    font-size: 0.82rem;
+    border-top: 1px solid var(--sage-light);
+  }
+
+  footer span { color: var(--sage); }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .glossary-item { flex-wrap: wrap; }
+    .glossary-term { min-width: auto; width: 100%; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">psych <span>3/4</span></div>
+  <ul class="nav-links">
+    <li><a href="#flashcards">Flashcards</a></li>
+    <li><a href="#quiz">Quiz</a></li>
+    <li><a href="#glossary">Glossary</a></li>
+    <li><a href="#notes">Notes</a></li>
+    <li><a href="#tips">Exam Tips</a></li>
+    <li><a href="#timeline">Timeline</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">VCE Psychology Units 3 & 4</div>
+  <h1>Your calm place<br>to <em>study & revise</em></h1>
+  <p>Everything you need for Stress & Wellbeing and the Nervous System — all in one quiet, organised space.</p>
+  <div class="topic-pills">
+    <span class="pill pill-rose">🧠 Stress & Wellbeing</span>
+    <span class="pill pill-sage">⚡ Nervous System</span>
+    <span class="pill pill-lav">✨ VCE Exam Ready</span>
+  </div>
+</section>
+
+<!-- QUICK NAV CARDS -->
+<div class="sections-grid">
+  <a href="#flashcards" class="section-nav-card">
+    <span class="icon">🃏</span>
+    <h3>Flashcards</h3>
+  </a>
+  <a href="#quiz" class="section-nav-card">
+    <span class="icon">✏️</span>
+    <h3>Quiz</h3>
+  </a>
+  <a href="#glossary" class="section-nav-card">
+    <span class="icon">📖</span>
+    <h3>Glossary</h3>
+  </a>
+  <a href="#notes" class="section-nav-card">
+    <span class="icon">📝</span>
+    <h3>Study Notes</h3>
+  </a>
+  <a href="#tips" class="section-nav-card">
+    <span class="icon">💡</span>
+    <h3>Exam Tips</h3>
+  </a>
+  <a href="#timeline" class="section-nav-card">
+    <span class="icon">🗺️</span>
+    <h3>Mind Map</h3>
+  </a>
+</div>
+
+<!-- ══════════════ FLASHCARDS ══════════════ -->
+<section class="study-section" id="flashcards">
+  <div class="section-header">
+    <div class="icon-lg icon-sage">🃏</div>
+    <div>
+      <h2>Flashcards</h2>
+      <div class="divider"></div>
+      <p>Click a card to reveal the definition</p>
+    </div>
+  </div>
+
+  <div class="flashcard-controls">
+    <div class="topic-filter">
+      <button class="filter-btn active" onclick="setFilter('all', this)">All</button>
+      <button class="filter-btn" onclick="setFilter('nervous', this)">Nervous System</button>
+      <button class="filter-btn" onclick="setFilter('stress', this)">Stress & Wellbeing</button>
+    </div>
+  </div>
+
+  <div class="flashcard-stage">
+    <div class="flashcard" id="flashcard" onclick="flipCard()">
+      <div class="card-face card-front">
+        <span class="label">Term</span>
+        <div class="term" id="card-term"></div>
+        <div class="hint" id="card-hint"></div>
+      </div>
+      <div class="card-face card-back">
+        <span class="label">Definition</span>
+        <div class="definition" id="card-def"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flashcard-nav">
+    <button class="nav-btn" onclick="prevCard()">←</button>
+    <span class="card-counter" id="card-counter">1 / 12</span>
+    <button class="nav-btn" onclick="nextCard()">→</button>
+  </div>
+  <p class="flip-hint">tap card to flip · use arrows to navigate</p>
+</section>
+
+<!-- ══════════════ QUIZ ══════════════ -->
+<section class="study-section" id="quiz">
+  <div class="section-header">
+    <div class="icon-lg icon-lav">✏️</div>
+    <div>
+      <h2>Practice Quiz</h2>
+      <div class="divider"></div>
+      <p>Test your knowledge with exam-style questions</p>
+    </div>
+  </div>
+
+  <div class="quiz-card" id="quiz-container">
+    <div class="quiz-progress-bar">
+      <div class="quiz-progress-fill" id="quiz-progress" style="width: 0%"></div>
+    </div>
+    <div class="quiz-question-num" id="quiz-qnum">Question 1 of 10</div>
+    <div class="quiz-question" id="quiz-question"></div>
+    <div class="quiz-options" id="quiz-options"></div>
+    <div class="quiz-feedback" id="quiz-feedback"></div>
+    <button class="btn-primary" id="quiz-next-btn" style="display:none" onclick="nextQuestion()">Next Question →</button>
+  </div>
+
+  <div class="quiz-score-display" id="quiz-score">
+    <div class="score-circle" id="score-number">0/10</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.8rem;margin-bottom:0.5rem;">Quiz Complete!</h3>
+    <p style="color:var(--text-light);margin-bottom:1.5rem;" id="score-message"></p>
+    <button class="btn-primary" onclick="restartQuiz()">Try Again</button>
+  </div>
+</section>
+
+<!-- ══════════════ GLOSSARY ══════════════ -->
+<section class="study-section" id="glossary">
+  <div class="section-header">
+    <div class="icon-lg icon-rose">📖</div>
+    <div>
+      <h2>Key Terms Glossary</h2>
+      <div class="divider"></div>
+      <p>Search and explore all key terms</p>
+    </div>
+  </div>
+
+  <input class="glossary-search" type="text" placeholder="Search a term..." oninput="searchGlossary(this.value)" id="glossary-search">
+  <div class="glossary-grid" id="glossary-grid"></div>
+  <p class="no-results" id="no-results">No terms found. Try a different search.</p>
+</section>
+
+<!-- ══════════════ STUDY NOTES ══════════════ -->
+<section class="study-section" id="notes">
+  <div class="section-header">
+    <div class="icon-lg icon-mint">📝</div>
+    <div>
+      <h2>Study Notes</h2>
+      <div class="divider"></div>
+      <p>Condensed summaries of each topic</p>
+    </div>
+  </div>
+
+  <div class="notes-tabs">
+    <button class="notes-tab active" onclick="showTab('nervous')">Nervous System</button>
+    <button class="notes-tab" onclick="showTab('stress')">Stress & Wellbeing</button>
+    <button class="notes-tab" onclick="showTab('models')">Key Models</button>
+  </div>
+
+  <!-- Nervous System Notes -->
+  <div class="notes-content active" id="tab-nervous">
+    <div class="notes-card">
+      <h3>🧠 The Nervous System — Structure</h3>
+      <div class="diagram">
+        <div class="diagram-title">Nervous System Hierarchy</div>
+        <div class="ns-diagram">
+          <div class="ns-box ns-central">Central Nervous System (CNS)<br><small style="font-weight:300">Brain + Spinal Cord</small></div>
+          <div class="ns-line"></div>
+          <div class="ns-box ns-peripheral">Peripheral Nervous System (PNS)</div>
+          <div class="ns-line"></div>
+          <div class="ns-row">
+            <div class="ns-box ns-somatic">Somatic NS<br><small>Voluntary</small></div>
+            <div class="ns-box ns-auto">Autonomic NS<br><small>Involuntary</small></div>
+          </div>
+          <div class="ns-line"></div>
+          <div class="ns-row">
+            <div class="ns-box ns-symp">Sympathetic<br><small>Fight-or-flight</small></div>
+            <div class="ns-box ns-para">Parasympathetic<br><small>Rest-and-digest</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes-card">
+      <h3>⚡ Sympathetic vs Parasympathetic</h3>
+      <p>These two branches of the autonomic nervous system work in <strong>opposition</strong> to regulate internal balance (homeostasis).</p>
+      <ul>
+        <li><strong>Sympathetic (Fight-or-Flight):</strong> Increases heart rate, dilates pupils, inhibits digestion, releases adrenaline, redirects blood to muscles.</li>
+        <li><strong>Parasympathetic (Rest-and-Digest):</strong> Decreases heart rate, constricts pupils, stimulates digestion, promotes recovery and calming.</li>
+      </ul>
+      <div class="info-box">💡 <strong>Remember:</strong> Sympathetic = Stress response. Parasympathetic = Peace. Think "P" for Peace, "S" for Stress.</div>
+    </div>
+
+    <div class="notes-card">
+      <h3>🔬 Neurons & Neurotransmitters</h3>
+      <ul>
+        <li><strong>Neurons:</strong> Specialised cells that transmit nerve impulses. Three types: sensory, motor, interneurons.</li>
+        <li><strong>Synapse:</strong> The gap between two neurons. Neurotransmitters carry signals across it.</li>
+        <li><strong>Key Neurotransmitters:</strong>
+          <ul>
+            <li><em>GABA</em> — inhibitory; reduces neural activity; involved in relaxation</li>
+            <li><em>Glutamate</em> — excitatory; key role in memory & learning</li>
+            <li><em>Dopamine</em> — reward, motivation, movement</li>
+            <li><em>Serotonin</em> — mood, sleep, wellbeing</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Stress & Wellbeing Notes -->
+  <div class="notes-content" id="tab-stress">
+    <div class="notes-card">
+      <h3>😓 What is Stress?</h3>
+      <p>Stress is a <strong>psychological and physiological response</strong> to perceived demands that exceed available resources (Lazarus & Folkman, 1984).</p>
+      <ul>
+        <li><strong>Eustress:</strong> Positive stress — motivating and short-term (e.g., before a performance)</li>
+        <li><strong>Distress:</strong> Negative stress — chronic or overwhelming</li>
+        <li><strong>Acute stress:</strong> Short-term, intense (e.g., near-miss accident)</li>
+        <li><strong>Chronic stress:</strong> Long-term, ongoing (e.g., financial pressure)</li>
+      </ul>
+    </div>
+
+    <div class="notes-card">
+      <h3>🔄 The Stress Response (HPA Axis)</h3>
+      <p>When a stressor is perceived, the <strong>Hypothalamic-Pituitary-Adrenal (HPA) axis</strong> is activated:</p>
+      <ul>
+        <li><strong>1. Hypothalamus</strong> detects threat → releases CRH</li>
+        <li><strong>2. Pituitary gland</strong> releases ACTH into bloodstream</li>
+        <li><strong>3. Adrenal glands</strong> release cortisol → sustains stress response</li>
+      </ul>
+      <div class="info-box">🔬 Cortisol helps mobilise energy but suppresses immune function during prolonged stress — explaining why chronic stress leads to illness.</div>
+    </div>
+
+    <div class="notes-card">
+      <h3>🛡️ Coping Strategies</h3>
+      <ul>
+        <li><strong>Approach coping:</strong> Directly addressing the stressor (e.g., studying for an exam)</li>
+        <li><strong>Avoidance coping:</strong> Avoiding the stressor (e.g., procrastinating) — effective short-term but maladaptive long-term</li>
+        <li><strong>Problem-focused coping:</strong> Taking action to change the situation</li>
+        <li><strong>Emotion-focused coping:</strong> Managing feelings about the situation</li>
+      </ul>
+    </div>
+
+    <div class="notes-card">
+      <h3>🌿 Wellbeing</h3>
+      <p>Wellbeing is a multi-dimensional concept involving:</p>
+      <ul>
+        <li><strong>Physical wellbeing:</strong> Body health, sleep, exercise, nutrition</li>
+        <li><strong>Psychological wellbeing:</strong> Emotional regulation, mental health, self-efficacy</li>
+        <li><strong>Social wellbeing:</strong> Relationships, belonging, community connection</li>
+      </ul>
+      <div class="info-box">📌 For VCE, know the difference between internal and external protective factors for mental wellbeing.</div>
+    </div>
+  </div>
+
+  <!-- Key Models -->
+  <div class="notes-content" id="tab-models">
+    <div class="notes-card">
+      <h3>📊 Lazarus & Folkman — Transactional Model of Stress</h3>
+      <p>Stress is a <strong>transaction</strong> between a person and their environment, involving two appraisal stages:</p>
+      <ul>
+        <li><strong>Primary appraisal:</strong> "Is this a threat?" — Irrelevant / Benign-positive / Stressful</li>
+        <li><strong>Secondary appraisal:</strong> "Can I cope?" — Assessing resources available</li>
+      </ul>
+      <p>If demands exceed resources → stress is experienced. This model explains why the same event causes different stress levels in different people.</p>
+    </div>
+
+    <div class="notes-card">
+      <h3>🔁 Selye's General Adaptation Syndrome (GAS)</h3>
+      <p>Selye proposed a 3-stage physiological response to prolonged stress:</p>
+      <ul>
+        <li><strong>Stage 1 — Alarm:</strong> Initial fight-or-flight response activated (SNS)</li>
+        <li><strong>Stage 2 — Resistance:</strong> Body adapts; appears to cope but is depleted</li>
+        <li><strong>Stage 3 — Exhaustion:</strong> Resources depleted; illness, burnout, breakdown</li>
+      </ul>
+      <div class="info-box">💡 GAS is a <em>biological</em> model; Lazarus & Folkman is a <em>cognitive/psychological</em> model. Know the difference!</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ EXAM TIPS ══════════════ -->
+<section class="study-section" id="tips">
+  <div class="section-header">
+    <div class="icon-lg icon-peach">💡</div>
+    <div>
+      <h2>Exam Tips</h2>
+      <div class="divider"></div>
+      <p>Smart strategies to maximise your marks</p>
+    </div>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card highlight-sage">
+      <span class="tip-icon">🎯</span>
+      <h3>Command Words Matter</h3>
+      <ul>
+        <li><strong>Define</strong> — give the exact meaning, no elaboration needed</li>
+        <li><strong>Describe</strong> — give characteristics, no explanation needed</li>
+        <li><strong>Explain</strong> — give <em>why/how</em> with reasoning</li>
+        <li><strong>Evaluate</strong> — give strengths AND limitations</li>
+        <li><strong>Compare</strong> — state similarities AND differences</li>
+      </ul>
+    </div>
+
+    <div class="tip-card highlight-lav">
+      <span class="tip-icon">🧬</span>
+      <h3>Nervous System Questions</h3>
+      <ul>
+        <li>Always specify <em>which branch</em> of the NS (SNS vs PNS vs ANS)</li>
+        <li>Name the neurotransmitter AND its effect</li>
+        <li>Use directional language: "increases", "inhibits", "activates"</li>
+        <li>Link structure to function (e.g., sympathetic → dilates pupils → to improve vision in threat)</li>
+      </ul>
+    </div>
+
+    <div class="tip-card highlight-rose">
+      <span class="tip-icon">😰</span>
+      <h3>Stress & Wellbeing Questions</h3>
+      <ul>
+        <li>Name the model you're using (Lazarus & Folkman / Selye GAS)</li>
+        <li>Apply to the scenario — don't just define</li>
+        <li>For GAS: name the stage, describe physiological response</li>
+        <li>Distinguish approach vs avoidance coping clearly</li>
+      </ul>
+    </div>
+
+    <div class="tip-card highlight-mint">
+      <span class="tip-icon">✍️</span>
+      <h3>Writing Extended Responses</h3>
+      <ul>
+        <li>Open with a direct statement — don't re-quote the question</li>
+        <li>Use psychological terminology throughout</li>
+        <li>Structure: Define → Explain → Apply → Evaluate (if needed)</li>
+        <li>Finish by connecting back to the question stem</li>
+      </ul>
+    </div>
+
+    <div class="tip-card highlight-sage">
+      <span class="tip-icon">📅</span>
+      <h3>Study Strategy</h3>
+      <ul>
+        <li>Use spaced repetition for key terms — review after 1, 3, 7, 14 days</li>
+        <li>Practice past SAC questions under timed conditions</li>
+        <li>Draw the NS hierarchy diagram from memory daily</li>
+        <li>Teach someone else — it reveals gaps in your knowledge</li>
+      </ul>
+    </div>
+
+    <div class="tip-card highlight-lav">
+      <span class="tip-icon">⚠️</span>
+      <h3>Common Mistakes to Avoid</h3>
+      <ul>
+        <li>Confusing the <em>somatic</em> and <em>autonomic</em> nervous systems</li>
+        <li>Forgetting secondary appraisal in Lazarus & Folkman</li>
+        <li>Using "adrenaline" when asked about cortisol (different pathways!)</li>
+        <li>Describing instead of explaining when "explain" is asked</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ TIMELINE / MIND MAP ══════════════ -->
+<section class="study-section" id="timeline">
+  <div class="section-header">
+    <div class="icon-lg icon-sky">🗺️</div>
+    <div>
+      <h2>Visual Timeline</h2>
+      <div class="divider"></div>
+      <p>Follow the sequence of key processes</p>
+    </div>
+  </div>
+
+  <div class="timeline-tabs">
+    <button class="filter-btn active" onclick="setTimeline('stress-response', this)">Stress Response</button>
+    <button class="filter-btn" onclick="setTimeline('ns-pathway', this)">NS Signal Pathway</button>
+    <button class="filter-btn" onclick="setTimeline('gas', this)">Selye's GAS</button>
+  </div>
+
+  <div class="timeline" id="timeline-content"></div>
+</section>
+
+<footer>
+  Made with 🌿 for your VCE journey · <span>Good luck!</span>
+</footer>
+
+<script>
+// ═══════════ DATA ═══════════
+
+const flashcards = [
+  { topic:'nervous', term:'Central Nervous System', hint:'The command centre', def:'The brain and spinal cord; responsible for processing and integrating information to coordinate body functions.' },
+  { topic:'nervous', term:'Peripheral Nervous System', hint:'The messengers', def:'All nerves outside the brain and spinal cord. Divided into the somatic and autonomic nervous systems.' },
+  { topic:'nervous', term:'Sympathetic Nervous System', hint:'Fight-or-flight', def:'The branch of the ANS that prepares the body for emergency situations: increases heart rate, dilates pupils, inhibits digestion.' },
+  { topic:'nervous', term:'Parasympathetic NS', hint:'Rest and digest', def:'The branch of the ANS that conserves energy and promotes rest: slows heart rate, stimulates digestion, constricts pupils.' },
+  { topic:'nervous', term:'Neurotransmitter', hint:'Chemical messenger', def:'A chemical substance released at a synapse that carries signals from one neuron to the next, either exciting or inhibiting the receiving neuron.' },
+  { topic:'nervous', term:'GABA', hint:'Calming chemical', def:'Gamma-aminobutyric acid — the main inhibitory neurotransmitter; reduces neural activity and promotes relaxation and sleep.' },
+  { topic:'nervous', term:'Synapse', hint:'The gap', def:'The microscopic gap between two neurons. Neurotransmitters are released across the synapse to transmit signals.' },
+  { topic:'stress', term:'Eustress', hint:'The good kind', def:'Positive, beneficial stress that is short-term and motivating. Associated with excitement and improved performance (e.g., competition).' },
+  { topic:'stress', term:'Distress', hint:'Harmful stress', def:'Negative stress that can be acute or chronic. Impairs wellbeing and functioning when demands exceed coping resources.' },
+  { topic:'stress', term:'Primary Appraisal', hint:'Is this a threat?', def:'The first stage in Lazarus & Folkman\'s model: evaluating whether a situation is irrelevant, benign-positive, or a stressor.' },
+  { topic:'stress', term:'Secondary Appraisal', hint:'Can I cope?', def:'The second stage of appraisal: evaluating the coping options and resources available to deal with the perceived stressor.' },
+  { topic:'stress', term:'Cortisol', hint:'The stress hormone', def:'A glucocorticoid hormone released by the adrenal cortex during the HPA axis stress response. Sustains energy mobilisation but suppresses immunity with chronic exposure.' },
+  { topic:'stress', term:'HPA Axis', hint:'Hormonal stress highway', def:'Hypothalamic-Pituitary-Adrenal axis: the hormonal system that regulates the long-term stress response by releasing cortisol.' },
+  { topic:'stress', term:'Approach Coping', hint:'Face it head-on', def:'A coping strategy where the individual directly confronts or addresses the stressor (e.g., problem-solving, seeking information).' },
+];
+
+const quizData = [
+  { q: 'Which branch of the nervous system activates the "fight-or-flight" response?', opts: ['Parasympathetic', 'Somatic', 'Sympathetic', 'Central'], ans: 2, exp: 'The sympathetic nervous system prepares the body for emergency situations by increasing heart rate, dilating pupils, and redirecting blood to muscles.' },
+  { q: 'In Lazarus & Folkman\'s Transactional Model, what does PRIMARY appraisal evaluate?', opts: ['How many coping resources you have', 'Whether the situation is a threat', 'The physical symptoms of stress', 'Which coping strategy to use'], ans: 1, exp: 'Primary appraisal asks "Is this a threat?" — classifying the event as irrelevant, benign-positive, or stressful.' },
+  { q: 'GABA is best described as:', opts: ['An excitatory neurotransmitter involved in memory', 'An inhibitory neurotransmitter that reduces neural activity', 'A hormone released by the adrenal glands', 'A structure in the peripheral nervous system'], ans: 1, exp: 'GABA (Gamma-aminobutyric acid) is the main inhibitory neurotransmitter — it calms neural activity and promotes relaxation.' },
+  { q: 'Which hormone is released during the HPA axis stress response to maintain long-term arousal?', opts: ['Adrenaline (epinephrine)', 'Dopamine', 'Cortisol', 'Serotonin'], ans: 2, exp: 'Cortisol is released by the adrenal cortex via the HPA axis. Unlike adrenaline (which is fast-acting), cortisol provides a sustained energy response.' },
+  { q: 'Selye\'s General Adaptation Syndrome Stage 2 is called:', opts: ['Alarm', 'Resistance', 'Exhaustion', 'Recovery'], ans: 1, exp: 'Stage 2 is Resistance — the body appears to cope and maintain normal function, but resources are being depleted at a high cost.' },
+  { q: 'The somatic nervous system controls:', opts: ['Involuntary functions like heart rate', 'Voluntary skeletal muscle movement', 'The stress hormone cortisol', 'Parasympathetic responses'], ans: 1, exp: 'The somatic nervous system controls voluntary movement of skeletal muscles (e.g., walking, speaking).' },
+  { q: 'Eustress differs from distress in that it is:', opts: ['More intense and damaging', 'Always chronic and long-lasting', 'Positive, motivating, and usually short-term', 'Caused only by physical threats'], ans: 2, exp: 'Eustress is positive stress — it is typically short-term, associated with excitement, and can improve performance and motivation.' },
+  { q: 'A student who avoids studying to reduce exam anxiety is using:', opts: ['Problem-focused coping', 'Approach coping', 'Avoidance coping', 'Secondary appraisal'], ans: 2, exp: 'Avoidance coping involves not confronting the stressor. It may reduce anxiety short-term but is generally maladaptive long-term.' },
+  { q: 'Which best describes the role of the parasympathetic nervous system?', opts: ['Prepares body for fight-or-flight', 'Controls voluntary movement', 'Restores the body to a calm, resting state', 'Transmits sensory information to the brain'], ans: 2, exp: 'The parasympathetic ("rest and digest") system slows heart rate, stimulates digestion, and helps the body recover after stress.' },
+  { q: 'The space between two neurons where neurotransmitters are released is called the:', opts: ['Axon terminal', 'Dendrite', 'Myelin sheath', 'Synapse'], ans: 3, exp: 'The synapse is the microscopic gap between two neurons. Neurotransmitters travel across it to transmit nerve signals.' },
+];
+
+const glossaryData = [
+  { term: 'Autonomic Nervous System', def: 'Division of the PNS that controls involuntary bodily functions (heart rate, digestion, breathing).', topic: 'nervous' },
+  { term: 'Axon', def: 'The long fibre of a neuron that carries electrical signals away from the cell body.', topic: 'nervous' },
+  { term: 'Central Nervous System', def: 'The brain and spinal cord — the control centre of the body.', topic: 'nervous' },
+  { term: 'Cortisol', def: 'Stress hormone released by the adrenal cortex via the HPA axis; mobilises energy but suppresses immunity.', topic: 'stress' },
+  { term: 'Dendrites', def: 'Branch-like extensions of a neuron that receive incoming signals from other neurons.', topic: 'nervous' },
+  { term: 'Distress', def: 'Negative, potentially harmful stress that impairs functioning — can be acute or chronic.', topic: 'stress' },
+  { term: 'Eustress', def: 'Positive, beneficial stress that motivates and enhances performance.', topic: 'stress' },
+  { term: 'GABA', def: 'Main inhibitory neurotransmitter; calms neural activity and promotes relaxation.', topic: 'nervous' },
+  { term: 'General Adaptation Syndrome', def: 'Selye\'s 3-stage model of the body\'s response to prolonged stress: Alarm → Resistance → Exhaustion.', topic: 'stress' },
+  { term: 'Glutamate', def: 'Main excitatory neurotransmitter; critical for learning and memory.', topic: 'nervous' },
+  { term: 'HPA Axis', def: 'Hypothalamic-Pituitary-Adrenal axis — hormonal pathway that sustains long-term stress response via cortisol release.', topic: 'stress' },
+  { term: 'Homeostasis', def: 'The body\'s tendency to maintain a stable internal environment (e.g., temperature, heart rate).', topic: 'nervous' },
+  { term: 'Interneuron', def: 'Neurons in the CNS that connect sensory and motor neurons; process and relay information.', topic: 'nervous' },
+  { term: 'Lazarus & Folkman Model', def: 'Transactional model where stress results from an appraisal of demands exceeding available coping resources.', topic: 'stress' },
+  { term: 'Motor Neuron', def: 'Neuron that carries signals from the CNS to muscles and glands (efferent).', topic: 'nervous' },
+  { term: 'Neurotransmitter', def: 'Chemical messenger that transmits signals across a synapse between neurons.', topic: 'nervous' },
+  { term: 'Parasympathetic NS', def: 'Branch of the ANS that restores the body to a calm, resting state — rest and digest.', topic: 'nervous' },
+  { term: 'Peripheral Nervous System', def: 'All nerves outside the CNS; includes somatic and autonomic divisions.', topic: 'nervous' },
+  { term: 'Primary Appraisal', def: 'First stage of stress appraisal: judging whether a situation is a threat or irrelevant.', topic: 'stress' },
+  { term: 'Secondary Appraisal', def: 'Second stage of stress appraisal: evaluating available coping resources and strategies.', topic: 'stress' },
+  { term: 'Sensory Neuron', def: 'Neuron that carries signals from sensory receptors to the CNS (afferent).', topic: 'nervous' },
+  { term: 'Serotonin', def: 'Neurotransmitter regulating mood, sleep, and wellbeing; low levels linked to depression.', topic: 'nervous' },
+  { term: 'Somatic Nervous System', def: 'Division of the PNS that controls voluntary skeletal muscle movement.', topic: 'nervous' },
+  { term: 'Sympathetic NS', def: 'Branch of ANS that prepares body for fight-or-flight: increases heart rate, dilates pupils.', topic: 'nervous' },
+  { term: 'Synapse', def: 'The microscopic gap between two neurons where neurotransmitters are released.', topic: 'nervous' },
+  { term: 'Wellbeing', def: 'A multi-dimensional concept encompassing physical, psychological, and social health and functioning.', topic: 'stress' },
+];
+
+const timelines = {
+  'stress-response': [
+    { stage: 'Step 1', title: 'Stressor Encountered', desc: 'The brain perceives a potential threat (physical or psychological). Sensory information is routed to the amygdala.', color: 'dot-rose' },
+    { stage: 'Step 2', title: 'Primary Appraisal', desc: 'Cognitive appraisal: "Is this a threat?" (Lazarus & Folkman). If judged stressful, the stress response is triggered.', color: 'dot-lav' },
+    { stage: 'Step 3', title: 'Sympathetic NS Activation', desc: 'The hypothalamus activates the SNS. Adrenaline is released from the adrenal medulla → immediate fight-or-flight response.', color: 'dot-sage' },
+    { stage: 'Step 4', title: 'HPA Axis Activated', desc: 'For prolonged stress: Hypothalamus → CRH → Pituitary ACTH → Adrenal cortex releases cortisol.', color: 'dot-sage' },
+    { stage: 'Step 5', title: 'Secondary Appraisal', desc: '"Can I cope?" Coping resources are evaluated. Approach or avoidance coping strategies are engaged.', color: 'dot-lav' },
+    { stage: 'Step 6', title: 'Coping & Recovery', desc: 'If coping is effective, the parasympathetic NS restores homeostasis. Heart rate slows, cortisol levels drop.', color: 'dot-mint' },
+  ],
+  'ns-pathway': [
+    { stage: 'Origin', title: 'Stimulus Detected', desc: 'Sensory receptors (skin, eyes, ears, etc.) detect a stimulus in the external or internal environment.', color: 'dot-sage' },
+    { stage: 'Transmission', title: 'Sensory Neuron Fires', desc: 'A sensory (afferent) neuron carries the electrical signal toward the Central Nervous System via the spinal cord.', color: 'dot-sage' },
+    { stage: 'Processing', title: 'CNS Processes Signal', desc: 'The brain (or spinal cord for reflexes) processes the incoming information and formulates a response. Interneurons relay signals.', color: 'dot-lav' },
+    { stage: 'Response', title: 'Motor Neuron Activated', desc: 'A motor (efferent) neuron carries the response signal from the CNS to the appropriate muscle or gland.', color: 'dot-rose' },
+    { stage: 'Action', title: 'Effector Responds', desc: 'The target muscle contracts or the gland secretes — producing the behavioural or physiological response.', color: 'dot-mint' },
+  ],
+  'gas': [
+    { stage: 'Stage 1', title: 'Alarm Reaction', desc: 'The body detects a stressor and activates the fight-or-flight response. Adrenaline released. Resistance is initially LOWER than normal before rising.', color: 'dot-rose' },
+    { stage: 'Stage 2', title: 'Resistance', desc: 'The body adapts to the stressor and appears to cope normally. Physiological arousal is maintained but resources are being depleted. Cortisol levels remain elevated.', color: 'dot-lav' },
+    { stage: 'Stage 3', title: 'Exhaustion', desc: 'Resources are fully depleted. The body can no longer maintain resistance. Illness, burnout, immune suppression, and psychological breakdown may occur.', color: 'dot-sage' },
+  ],
+};
+
+// ═══════════ FLASHCARD LOGIC ═══════════
+let currentFilter = 'all';
+let filteredCards = [];
+let currentCard = 0;
+let isFlipped = false;
+
+function setFilter(filter, btn) {
+  currentFilter = filter;
+  document.querySelectorAll('.topic-filter .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  filteredCards = filter === 'all' ? flashcards : flashcards.filter(c => c.topic === filter);
+  currentCard = 0;
+  renderCard();
+}
+
+function renderCard() {
+  const fc = document.getElementById('flashcard');
+  fc.classList.remove('flipped');
+  isFlipped = false;
+  const card = filteredCards[currentCard];
+  document.getElementById('card-term').textContent = card.term;
+  document.getElementById('card-hint').textContent = card.hint;
+  document.getElementById('card-def').textContent = card.def;
+  document.getElementById('card-counter').textContent = `${currentCard + 1} / ${filteredCards.length}`;
+}
+
+function flipCard() {
+  const fc = document.getElementById('flashcard');
+  isFlipped = !isFlipped;
+  fc.classList.toggle('flipped', isFlipped);
+}
+
+function nextCard() {
+  currentCard = (currentCard + 1) % filteredCards.length;
+  renderCard();
+}
+
+function prevCard() {
+  currentCard = (currentCard - 1 + filteredCards.length) % filteredCards.length;
+  renderCard();
+}
+
+// ═══════════ QUIZ LOGIC ═══════════
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+
+function renderQuestion() {
+  const q = quizData[quizIndex];
+  document.getElementById('quiz-qnum').textContent = `Question ${quizIndex + 1} of ${quizData.length}`;
+  document.getElementById('quiz-question').textContent = q.q;
+  document.getElementById('quiz-progress').style.width = `${(quizIndex / quizData.length) * 100}%`;
+
+  const optDiv = document.getElementById('quiz-options');
+  optDiv.innerHTML = '';
+  q.opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'quiz-option';
+    btn.textContent = opt;
+    btn.onclick = () => answerQuestion(i);
+    optDiv.appendChild(btn);
+  });
+
+  document.getElementById('quiz-feedback').className = 'quiz-feedback';
+  document.getElementById('quiz-feedback').textContent = '';
+  document.getElementById('quiz-next-btn').style.display = 'none';
+  quizAnswered = false;
+}
+
+function answerQuestion(selected) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  const q = quizData[quizIndex];
+  const opts = document.querySelectorAll('.quiz-option');
+  opts.forEach(o => o.classList.add('disabled'));
+
+  const feedback = document.getElementById('quiz-feedback');
+  if (selected === q.ans) {
+    opts[selected].classList.add('correct');
+    feedback.className = 'quiz-feedback correct show';
+    feedback.textContent = `✓ Correct! ${q.exp}`;
+    quizScore++;
+  } else {
+    opts[selected].classList.add('incorrect');
+    opts[q.ans].classList.add('correct');
+    feedback.className = 'quiz-feedback incorrect show';
+    feedback.textContent = `✗ Not quite. ${q.exp}`;
+  }
+
+  document.getElementById('quiz-next-btn').style.display = 'block';
+}
+
+function nextQuestion() {
+  quizIndex++;
+  if (quizIndex >= quizData.length) {
+    showScore();
+  } else {
+    renderQuestion();
+  }
+}
+
+function showScore() {
+  document.getElementById('quiz-container').style.display = 'none';
+  const scoreEl = document.getElementById('quiz-score');
+  scoreEl.classList.add('show');
+  document.getElementById('score-number').textContent = `${quizScore}/${quizData.length}`;
+  const pct = (quizScore / quizData.length) * 100;
+  let msg = pct >= 80 ? '🌟 Excellent work — you really know your content!' :
+            pct >= 60 ? '👍 Good effort! Review the questions you missed.' :
+            '📚 Keep revising — you\'ll get there with practice!';
+  document.getElementById('score-message').textContent = msg;
+}
+
+function restartQuiz() {
+  quizIndex = 0; quizScore = 0; quizAnswered = false;
+  document.getElementById('quiz-container').style.display = 'block';
+  document.getElementById('quiz-score').classList.remove('show');
+  renderQuestion();
+}
+
+// ═══════════ GLOSSARY LOGIC ═══════════
+function renderGlossary(filter = '') {
+  const grid = document.getElementById('glossary-grid');
+  const noRes = document.getElementById('no-results');
+  const lower = filter.toLowerCase();
+  const filtered = glossaryData.filter(g =>
+    g.term.toLowerCase().includes(lower) || g.def.toLowerCase().includes(lower)
+  ).sort((a, b) => a.term.localeCompare(b.term));
+
+  grid.innerHTML = '';
+  noRes.style.display = filtered.length === 0 ? 'block' : 'none';
+
+  filtered.forEach(g => {
+    const div = document.createElement('div');
+    div.className = `glossary-item topic-${g.topic}`;
+    div.innerHTML = `
+      <div class="glossary-term">${g.term}</div>
+      <div class="glossary-def">${g.def}</div>
+      <span class="topic-tag tag-${g.topic}">${g.topic === 'nervous' ? 'Nervous System' : 'Stress'}</span>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+function searchGlossary(val) { renderGlossary(val); }
+
+// ═══════════ NOTES TABS ═══════════
+function showTab(tab) {
+  document.querySelectorAll('.notes-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.notes-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById(`tab-${tab}`).classList.add('active');
+  event.target.classList.add('active');
+}
+
+// ═══════════ TIMELINE LOGIC ═══════════
+function setTimeline(key, btn) {
+  document.querySelectorAll('.timeline-tabs .filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const tl = document.getElementById('timeline-content');
+  tl.innerHTML = '';
+  timelines[key].forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'timeline-item';
+    div.style.animationDelay = `${i * 0.08}s`;
+    div.innerHTML = `
+      <div class="timeline-dot ${item.color}"></div>
+      <div class="timeline-card">
+        <div class="timeline-stage">${item.stage}</div>
+        <div class="timeline-title">${item.title}</div>
+        <div class="timeline-desc">${item.desc}</div>
+      </div>
+    `;
+    tl.appendChild(div);
+  });
+}
+
+// ═══════════ INIT ═══════════
+filteredCards = flashcards;
+renderCard();
+renderQuestion();
+renderGlossary();
+setTimeline('stress-response', document.querySelector('.timeline-tabs .filter-btn'));
+</script>
+</body>
+</html>
