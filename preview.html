@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VCE Psychology Study Hub</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+--primary:#5b7cff;
+--secondary:#8fd3f4;
+--accent:#ff7ad9;
+--bg:#f4f6ff;
+}
+
+body{
+margin:0;
+font-family:Inter, sans-serif;
+background:linear-gradient(120deg,var(--primary),var(--secondary));
+color:#333;
+}
+
+header{
+background:white;
+padding:30px;
+text-align:center;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+header h1{
+margin:0;
+font-size:32px;
+color:#3c4bd9;
+}
+
+nav{
+display:flex;
+justify-content:center;
+flex-wrap:wrap;
+gap:12px;
+padding:20px;
+}
+
+nav button{
+padding:12px 18px;
+border:none;
+border-radius:10px;
+background:white;
+font-weight:600;
+cursor:pointer;
+box-shadow:0 4px 12px rgba(0,0,0,0.12);
+}
+
+nav button:hover{
+background:#eef1ff;
+}
+
+main{
+max-width:1000px;
+margin:auto;
+padding:20px;
+}
+
+section{
+display:none;
+}
+
+.active{
+display:block;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:14px;
+margin-bottom:20px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+h2{
+color:#3c4bd9;
+}
+
+.quiz-option{
+padding:12px;
+border:1px solid #ddd;
+border-radius:8px;
+margin-top:8px;
+cursor:pointer;
+}
+
+.quiz-option:hover{
+background:#f3f5ff;
+}
+
+.correct{
+background:#c9f7d3;
+}
+
+.wrong{
+background:#ffd4d4;
+}
+
+.flashcard{
+font-size:20px;
+text-align:center;
+cursor:pointer;
+padding:40px;
+}
+
+button.primary{
+background:var(--primary);
+border:none;
+color:white;
+padding:10px 16px;
+border-radius:8px;
+margin-top:15px;
+cursor:pointer;
+}
+
+button.primary:hover{
+background:#4a63f5;
+}
+
+footer{
+text-align:center;
+padding:20px;
+color:white;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🧠 VCE Psychology Study Hub</h1>
+<p>Units 3 & 4 Interactive Revision</p>
+</header>
+
+<nav>
+
+<button onclick="show('quiz')">Quiz</button>
+<button onclick="show('flashcards')">Flashcards</button>
+<button onclick="show('exam')">Exam Practice</button>
+<button onclick="show('topics')">Topics</button>
+<button onclick="show('glossary')">Glossary</button>
+<button onclick="show('tips')">Exam Tips</button>
+
+</nav>
+
+<main>
+
+<section id="quiz" class="active">
+<div class="card">
+
+<h2>Quick Quiz</h2>
+
+<div id="quiz"></div>
+
+<p id="score"></p>
+
+<button class="primary" onclick="nextQuestion()">Next Question</button>
+
+</div>
+</section>
+
+<section id="flashcards">
+<div class="card flashcard" id="flashcard" onclick="flipCard()"></div>
+
+<button class="primary" onclick="nextCard()">Next Card</button>
+</section>
+
+<section id="exam">
+
+<div class="card">
+
+<h2>SAC Practice Question</h2>
+
+<p id="examQuestion"></p>
+
+<button class="primary" onclick="nextExam()">Next Question</button>
+
+</div>
+
+</section>
+
+<section id="topics">
+
+<div class="card">
+
+<h2>Research Methods</h2>
+
+<p>
+Experimental research designs test cause-and-effect relationships by manipulating an independent variable
+and measuring the effect on a dependent variable.
+</p>
+
+<ul>
+<li><b>Between-groups design:</b> different participants in each condition.</li>
+<li><b>Within-groups design:</b> same participants experience all conditions.</li>
+<li><b>Mixed design:</b> combines both.</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Gut–Brain Axis</h2>
+
+<p>
+The gut–brain axis refers to the bidirectional communication network between the gastrointestinal
+system and the brain.
+</p>
+
+<p>
+Gut microbiota can influence:
+</p>
+
+<ul>
+<li>Mood</li>
+<li>Stress responses</li>
+<li>Cognition</li>
+<li>Immune functioning</li>
+</ul>
+
+</div>
+
+<div class="card">
+
+<h2>Sleep</h2>
+
+<p>
+Sleep is regulated by two biological mechanisms:
+</p>
+
+<ul>
+<li>Circadian rhythms</li>
+<li>Sleep-wake homeostasis</li>
+</ul>
+
+</div>
+
+</section>
+
+<section id="glossary">
+
+<div class="card">
+
+<h2>Key Terms</h2>
+
+<p><b>Independent Variable</b> – Variable manipulated by researcher</p>
+<p><b>Dependent Variable</b> – Variable measured in the experiment</p>
+<p><b>Control Group</b> – Participants who do not receive treatment</p>
+<p><b>Experimental Group</b> – Participants who receive treatment</p>
+<p><b>Gut Microbiota</b> – Microorganisms living in the digestive tract</p>
+<p><b>Circadian Rhythm</b> – Biological processes occurring in ~24 hour cycles</p>
+
+</div>
+
+</section>
+
+<section id="tips">
+
+<div class="card">
+
+<h2>Exam Tips</h2>
+
+<ul>
+
+<li>Always define key terms clearly.</li>
+
+<li>Use correct psychological terminology.</li>
+
+<li>For evaluation questions give a strength and limitation.</li>
+
+<li>Link answers directly to the scenario.</li>
+
+<li>Use examples when possible.</li>
+
+</ul>
+
+</div>
+
+</section>
+
+</main>
+
+<footer>
+VCE Psychology Revision Tool
+</footer>
+
+<script>
+
+function show(id){
+document.querySelectorAll("section").forEach(s=>s.classList.remove("active"))
+document.getElementById(id).classList.add("active")
+}
+
+const questions=[
+
+{
+q:"What is the purpose of a control group?",
+a:["Receive treatment","Provide baseline comparison","Measure IV","Remove variables"],
+c:1
+},
+
+{
+q:"Which design uses the same participants?",
+a:["Between groups","Within groups","Case study","Observation"],
+c:1
+},
+
+{
+q:"Experiments test:",
+a:["Correlation","Cause and effect","Random patterns","Survey data"],
+c:1
+}
+
+]
+
+let qIndex=0
+let score=0
+
+function loadQ(){
+
+let q=questions[qIndex]
+
+let html="<h3>"+q.q+"</h3>"
+
+q.a.forEach((opt,i)=>{
+
+html+=`<div class='quiz-option' onclick='answer(this,${i})'>${opt}</div>`
+
+})
+
+document.getElementById("quiz").innerHTML=html
+
+}
+
+function answer(el,i){
+
+if(i===questions[qIndex].c){
+
+el.classList.add("correct")
+
+score++
+
+}
+
+else{
+
+el.classList.add("wrong")
+
+}
+
+document.getElementById("score").innerText="Score: "+score
+
+}
+
+function nextQuestion(){
+
+qIndex=(qIndex+1)%questions.length
+
+loadQ()
+
+}
+
+loadQ()
+
+const cards=[
+
+{
+q:"Independent Variable",
+a:"The variable manipulated by the researcher."
+},
+
+{
+q:"Dependent Variable",
+a:"The variable that is measured in an experiment."
+},
+
+{
+q:"Between Groups Design",
+a:"Different participants in each condition."
+},
+
+{
+q:"Within Groups Design",
+a:"Same participants complete all conditions."
+}
+
+]
+
+let cardIndex=0
+let showing=true
+
+function loadCard(){
+
+document.getElementById("flashcard").innerText=cards[cardIndex].q
+
+showing=true
+
+}
+
+function flipCard(){
+
+let card=cards[cardIndex]
+
+document.getElementById("flashcard").innerText=showing?card.a:card.q
+
+showing=!showing
+
+}
+
+function nextCard(){
+
+cardIndex=(cardIndex+1)%cards.length
+
+loadCard()
+
+}
+
+loadCard()
+
+const exam=[
+
+"Explain one strength of a between-groups design.",
+
+"Explain one limitation of a within-groups design.",
+
+"Describe the role of gut microbiota in mental health.",
+
+"Evaluate the use of experimental research designs."
+
+]
+
+let examIndex=0
+
+function loadExam(){
+
+document.getElementById("examQuestion").innerText=exam[examIndex]
+
+}
+
+function nextExam(){
+
+examIndex=(examIndex+1)%exam.length
+
+loadExam()
+
+}
+
+loadExam()
+
+</script>
+
+</body>
+</html>
